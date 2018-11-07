@@ -74,7 +74,7 @@ os.file.FileManager.prototype.getContentType = function(file, callback) {
 
   // we are going to read the first 16KB and send that to the mime/content type detection
   if (buffer && buffer instanceof ArrayBuffer) {
-    os.file.mime.detect(buffer, file).then(onComplete).then(callback);
+    os.file.mime.detect(buffer.slice(0, 16 * 1024), file).then(onComplete).then(callback);
   } else if (fileBlob instanceof Blob) {
     goog.fs.FileReader.readAsArrayBuffer(fileBlob.slice(0, 16 * 1024)).addCallback(function(buffer) {
       os.file.mime.detect(buffer, file).then(onComplete).then(callback);

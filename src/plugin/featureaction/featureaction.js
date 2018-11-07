@@ -165,7 +165,7 @@ plugin.im.action.feature.getColumns = function(opt_entryType) {
     var dm = os.data.DataManager.getInstance();
     var source = dm.getSource(opt_entryType);
     if (source) {
-      columns = os.source.getFilterColumns(source, true);
+      columns = os.source.getFilterColumns(source, true, true);
     }
   }
 

@@ -67,9 +67,10 @@ os.source.identifySource = function(source) {
  * Get the filterable columns on a source.
  * @param {os.source.ISource} source The source.
  * @param {boolean=} opt_local If local columns should be included.
+ * @param {boolean=} opt_includeTime If the time column should be included.
  * @return {Array<!os.data.ColumnDefinition>} The columns.
  */
-os.source.getFilterColumns = function(source, opt_local) {
+os.source.getFilterColumns = function(source, opt_local, opt_includeTime) {
   var columns = null;
 
   if (source) {
@@ -77,11 +78,16 @@ os.source.getFilterColumns = function(source, opt_local) {
       columns = source.getColumns();
 
       if (columns && columns.length > 0) {
-        // this both creates a copy of the array so source columns aren't sorted, and removes the TIME column since
-        // filters won't play well with it.
-        columns = columns.filter(function(col) {
-          return col['field'] !== os.data.RecordField.TIME;
-        });
+        if (!opt_includeTime) {
+          // do not include the TIME column or any column with a datetime type by default for filtering
+          var re = /datetime/i;
+          columns = columns.filter(function(col) {
+            return col['field'] !== os.data.RecordField.TIME || !re.test(col['type']);
+          });
+        } else {
+          // leave TIME, but still get a new array
+          columns = columns.slice();
+        }
 
         columns.sort(os.ui.slick.column.numerateNameCompare);
       }
