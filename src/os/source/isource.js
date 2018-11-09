@@ -283,7 +283,7 @@ os.source.ISource.prototype.getHiddenItems;
 
 /**
  * Checks if a feature is hidden.
- * @param {string|ol.Feature} feature
+ * @param {string|number|ol.Feature} feature
  * @return {boolean}
  */
 os.source.ISource.prototype.isHidden;

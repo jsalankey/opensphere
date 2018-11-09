@@ -98,9 +98,9 @@ os.interaction.Hover.prototype.onMouseMove_ = function(mapBrowserEvent) {
        */
       function(feature, layer) {
         if (feature instanceof ol.Feature) {
-          if (feature.getStyle()) {
-            source = os.feature.getSource(feature, layer);
+          source = os.feature.getSource(feature, layer);
 
+          if (feature.getStyle()) {
             //
             // no layer means the feature was hit in an overlay - either for highlight or animation. if the feature is
             // currently highlighted, fall through to the next one since highlighted features are z-ordered on top and
@@ -117,11 +117,7 @@ os.interaction.Hover.prototype.onMouseMove_ = function(mapBrowserEvent) {
                 feature = null;
               }
             }
-
-            return feature;
           }
-
-          return null;
         }
 
         return feature;

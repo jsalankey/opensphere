@@ -100,9 +100,8 @@ os.ui.node.FeatureCountCtrl.prototype.getTotal = function() {
         return '(Loading...)';
       }
 
-      var model = this.source_.getTimeModel();
       var shown = this.source_.getFilteredFeatures().length;
-      var total = model.getSize();
+      var total = this.source_.getFeatureCount();
 
       return '(' + (shown == total ? total : shown + '/' + total) + ')';
     }
