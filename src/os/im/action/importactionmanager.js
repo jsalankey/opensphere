@@ -345,7 +345,7 @@ os.im.action.ImportActionManager.prototype.addActionEntry = function(entry, opt_
  * @protected
  */
 os.im.action.ImportActionManager.prototype.getEntryItems = function(type) {
-  return null;
+  return [];
 };
 
 
